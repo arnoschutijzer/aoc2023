@@ -6,8 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_Day1Part1Has142(t *testing.T) {
-	calibrationDocument := ReadCalibrationDocument("./fixtures/part1.txt")
+func Test_Day1Part1ExampleHas142(t *testing.T) {
+	calibrationDocument := ReadCalibrationDocument("./fixtures/example.txt")
 	calibrationValue := CalculateCalibrationValue(calibrationDocument)
 	assert.Equal(t, 142, calibrationValue)
 }
