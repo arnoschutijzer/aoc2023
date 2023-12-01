@@ -36,8 +36,7 @@ func FindNumberInCalibrationDocumentLine(input string) string {
 
 	// hehe
 	reversedRegex := regexp.MustCompile(`(\d)|(eno)|(owt)|(eerht)|(ruof)|(evif)|(xis)|(neves)|(thgie)|(enin)`)
-	reversed := reverse(input)
-	last := reverse(reversedRegex.FindAllString(reversed, -1)[0])
+	last := reverse(reversedRegex.FindAllString(reverse(input), -1)[0])
 
 	firstNumber, err := strconv.Atoi(first)
 	if err != nil {
