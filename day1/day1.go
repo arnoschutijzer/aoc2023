@@ -7,25 +7,11 @@ import (
 )
 
 func CalculateCalibrationValue(calibrationDocument []string) int {
-	m := make(map[string]int)
-	m["one"] = 1
-	m["two"] = 2
-	m["three"] = 3
-	m["four"] = 4
-	m["five"] = 5
-	m["six"] = 6
-	m["seven"] = 7
-	m["eight"] = 8
-	m["nine"] = 9
-
 	total := 0
 
 	for _, line := range calibrationDocument {
 		numberAsString := FindNumberInCalibrationDocumentLine(line);
-		actualNumber, err := strconv.Atoi(numberAsString);
-		if (err != nil) {
-			total += m[numberAsString]
-		}
+		actualNumber, _ := strconv.Atoi(numberAsString);
 		total += actualNumber
 	}
 
