@@ -36,4 +36,3 @@ func Test_FindsFirstAndLastInteger(t *testing.T) {
 	numbers = FindNumberInCalibrationDocumentLine("66836qblqgdhnine")
 	assert.Equal(t, "69", numbers)
 }
-

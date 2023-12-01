@@ -10,8 +10,8 @@ func CalculateCalibrationValue(calibrationDocument []string) int {
 	total := 0
 
 	for _, line := range calibrationDocument {
-		numberAsString := FindNumberInCalibrationDocumentLine(line);
-		actualNumber, _ := strconv.Atoi(numberAsString);
+		numberAsString := FindNumberInCalibrationDocumentLine(line)
+		actualNumber, _ := strconv.Atoi(numberAsString)
 		total += actualNumber
 	}
 
@@ -19,15 +19,15 @@ func CalculateCalibrationValue(calibrationDocument []string) int {
 }
 
 var lookup = map[string]int{
-	"one": 1,
-	"two": 2,
+	"one":   1,
+	"two":   2,
 	"three": 3,
-	"four": 4,
-	"five": 5,
-	"six": 6,
+	"four":  4,
+	"five":  5,
+	"six":   6,
 	"seven": 7,
 	"eight": 8,
-	"nine": 9,
+	"nine":  9,
 }
 
 func FindNumberInCalibrationDocumentLine(input string) string {
@@ -52,9 +52,9 @@ func FindNumberInCalibrationDocumentLine(input string) string {
 }
 
 func reverse(s string) string {
-    chars := []rune(s)
-    for i, j := 0, len(chars)-1; i < j; i, j = i+1, j-1 {
-        chars[i], chars[j] = chars[j], chars[i]
-    }
-    return string(chars)
+	chars := []rune(s)
+	for i, j := 0, len(chars)-1; i < j; i, j = i+1, j-1 {
+		chars[i], chars[j] = chars[j], chars[i]
+	}
+	return string(chars)
 }
