@@ -3,19 +3,28 @@ package day1
 import (
 	"fmt"
 	"strconv"
-
-	"github.com/dlclark/regexp2"
+	"strings"
 )
 
 func CalculateCalibrationValue(calibrationDocument []string) int {
+	m := make(map[string]int)
+	m["one"] = 1
+	m["two"] = 2
+	m["three"] = 3
+	m["four"] = 4
+	m["five"] = 5
+	m["six"] = 6
+	m["seven"] = 7
+	m["eight"] = 8
+	m["nine"] = 9
+
 	total := 0
 
-	for i, line := range calibrationDocument {
+	for _, line := range calibrationDocument {
 		numberAsString := FindNumberInCalibrationDocumentLine(line);
 		actualNumber, err := strconv.Atoi(numberAsString);
-		fmt.Printf("%d - %d\n", i, actualNumber)
 		if (err != nil) {
-			panic("invalid number!")
+			total += m[numberAsString]
 		}
 		total += actualNumber
 	}
@@ -23,20 +32,51 @@ func CalculateCalibrationValue(calibrationDocument []string) int {
 	return total
 }
 
+var lookup = map[string]int{
+	"one": 1,
+	"two": 2,
+	"three": 3,
+	"four": 4,
+	"five": 5,
+	"six": 6,
+	"seven": 7,
+	"eight": 8,
+	"nine": 9,
+}
+
 func FindNumberInCalibrationDocumentLine(input string) string {
-	re := regexp2.MustCompile(`(\d)`, regexp2.RegexOptions(regexp2.IgnoreCase))
-	var numbers []string
-	m, _ := re.FindStringMatch(input)
-	for m != nil {
-		numbers = append(numbers, m.String())
-		m, _ = re.FindNextMatch(m)
-	}
-	fmt.Printf("%d", len(numbers));
+	firstIndex := -1
+	first := -1
+	lastIndex := -1
+	last := -1
 
-	if len(numbers) > 1 {
-		fmt.Printf("%s - %s", numbers[0], numbers[1]);
-		return numbers[0] + numbers[len(numbers) -1];
+	characters := strings.Split(input, "")
+	for index, character := range characters {
+		number, err := strconv.Atoi(character)
+		if err == nil {
+			if first == -1 {
+				firstIndex = index;
+				first = number
+			}
+	
+			lastIndex = index;
+			last = number	
+		}
 	}
 
-	return numbers[0] + numbers[0]
+	for index := range characters {
+		for key, value := range lookup {
+			if strings.HasPrefix(input[index:], key) {
+				if (index < firstIndex) {
+					firstIndex = index;
+					first = value
+				}
+				if (index > lastIndex) {
+					lastIndex = index
+					last = value
+				}
+			}
+		}
+	}
+	return fmt.Sprintf("%d%d", first, last)
 }
