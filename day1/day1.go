@@ -2,8 +2,9 @@ package day1
 
 import (
 	"fmt"
-	"regexp"
 	"strconv"
+
+	"github.com/dlclark/regexp2"
 )
 
 func CalculateCalibrationValue(calibrationDocument []string) int {
@@ -23,8 +24,13 @@ func CalculateCalibrationValue(calibrationDocument []string) int {
 }
 
 func FindNumberInCalibrationDocumentLine(input string) string {
-	re := regexp.MustCompile(`(\d)`)
-	numbers := re.FindAllString(input, -1)
+	re := regexp2.MustCompile(`(\d)`, regexp2.RegexOptions(regexp2.IgnoreCase))
+	var numbers []string
+	m, _ := re.FindStringMatch(input)
+	for m != nil {
+		numbers = append(numbers, m.String())
+		m, _ = re.FindNextMatch(m)
+	}
 	fmt.Printf("%d", len(numbers));
 
 	if len(numbers) > 1 {
