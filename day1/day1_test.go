@@ -12,6 +12,12 @@ func Test_Day1Part1ExampleHas142(t *testing.T) {
 	assert.Equal(t, 142, calibrationValue)
 }
 
+func Test_Day1Part1HasAnAnswer(t *testing.T) {
+	calibrationDocument := ReadCalibrationDocument("./fixtures/part1.txt")
+	calibrationValue := CalculateCalibrationValue(calibrationDocument)
+	assert.Equal(t, 142, calibrationValue)
+}
+
 func Test_FindsFirstAndLastInteger(t *testing.T) {
 	var numbers string
 
@@ -26,5 +32,8 @@ func Test_FindsFirstAndLastInteger(t *testing.T) {
 
 	numbers = FindNumberInCalibrationDocumentLine("treb7uchet")
 	assert.Equal(t, "77", numbers)
+
+	numbers = FindNumberInCalibrationDocumentLine("66836qblqgdhnine")
+	assert.Equal(t, "66", numbers)
 }
 
