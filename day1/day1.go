@@ -2,8 +2,8 @@ package day1
 
 import (
 	"fmt"
+	"regexp"
 	"strconv"
-	"strings"
 )
 
 func CalculateCalibrationValue(calibrationDocument []string) int {
@@ -45,38 +45,30 @@ var lookup = map[string]int{
 }
 
 func FindNumberInCalibrationDocumentLine(input string) string {
-	firstIndex := -1
-	first := -1
-	lastIndex := -1
-	last := -1
+	re := regexp.MustCompile(`(\d)|(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)`)
+	first := re.FindAllString(input, -1)[0]
 
-	characters := strings.Split(input, "")
-	for index, character := range characters {
-		number, err := strconv.Atoi(character)
-		if err == nil {
-			if first == -1 {
-				firstIndex = index;
-				first = number
-			}
-	
-			lastIndex = index;
-			last = number	
-		}
+	// hehe
+	reversedRegex := regexp.MustCompile(`(\d)|(eno)|(owt)|(eerht)|(ruof)|(evif)|(xis)|(neves)|(thgie)|(enin)`)
+	reversed := reverse(input)
+	last := reverse(reversedRegex.FindAllString(reversed, -1)[0])
+
+	firstNumber, err := strconv.Atoi(first)
+	if err != nil {
+		firstNumber = lookup[first]
+	}
+	lastNumber, err := strconv.Atoi(last)
+	if err != nil {
+		lastNumber = lookup[last]
 	}
 
-	for index := range characters {
-		for key, value := range lookup {
-			if strings.HasPrefix(input[index:], key) {
-				if (index < firstIndex) {
-					firstIndex = index;
-					first = value
-				}
-				if (index > lastIndex) {
-					lastIndex = index
-					last = value
-				}
-			}
-		}
-	}
-	return fmt.Sprintf("%d%d", first, last)
+	return fmt.Sprintf("%d%d", firstNumber, lastNumber)
+}
+
+func reverse(s string) string {
+    chars := []rune(s)
+    for i, j := 0, len(chars)-1; i < j; i, j = i+1, j-1 {
+        chars[i], chars[j] = chars[j], chars[i]
+    }
+    return string(chars)
 }
