@@ -8,7 +8,7 @@ import (
 
 func Test_Day2Part1FirstGameIsPossible(t *testing.T) {
 	games := ReadGames("./fixtures/example.txt")
-	isPotentialGame := IsPossibleGame(games[0], map[string]int{
+	isPotentialGame := isPossibleGame(games[0], map[string]int{
 		"red":   12,
 		"green": 13,
 		"blue":  14,
@@ -18,7 +18,7 @@ func Test_Day2Part1FirstGameIsPossible(t *testing.T) {
 
 func Test_Day2Part1SecondGameIsPossible(t *testing.T) {
 	games := ReadGames("./fixtures/example.txt")
-	isPotentialGame := IsPossibleGame(games[1], map[string]int{
+	isPotentialGame := isPossibleGame(games[1], map[string]int{
 		"red":   12,
 		"green": 13,
 		"blue":  14,
@@ -28,7 +28,7 @@ func Test_Day2Part1SecondGameIsPossible(t *testing.T) {
 
 func Test_Day2Part1ThirdGameIsNotPossible(t *testing.T) {
 	games := ReadGames("./fixtures/example.txt")
-	isPotentialGame := IsPossibleGame(games[2], map[string]int{
+	isPotentialGame := isPossibleGame(games[2], map[string]int{
 		"red":   12,
 		"green": 13,
 		"blue":  14,

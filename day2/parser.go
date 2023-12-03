@@ -14,14 +14,14 @@ func ReadGames(path string) []map[string]int {
 	gameInfo := make([]map[string]int, 0)
 
 	for _, game := range games {
-		buckets := ReadGameLine(game)
+		buckets := readGameLine(game)
 		gameInfo = append(gameInfo, buckets)
 	}
 
 	return gameInfo
 }
 
-func ReadGameLine(game string) map[string]int {
+func readGameLine(game string) map[string]int {
 	buckets := make(map[string]int)
 
 	gameInformation := strings.Split(game, ":")[1]
