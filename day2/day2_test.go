@@ -56,7 +56,7 @@ func Test_Day2Part1(t *testing.T) {
 	assert.Equal(t, 2317, sum)
 }
 
-func Test_Day2Part1FirstGameHas48Power(t *testing.T) {
+func Test_Day2Part2FirstGameHas48Power(t *testing.T) {
 	games := ReadGames("./fixtures/example.txt")
 	totalPower := GetTotalPowerOfSet(games[0])
 	assert.Equal(t, 48, totalPower)
